@@ -1,0 +1,260 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(90deg, #000000, #737373);
+    color: #fefafa;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #000000;
+    border: white;
+    border-style: solid;
+}
+
+.logo {
+    height: 100px;
+    padding-left: 50px;
+}
+
+.nav-buttons button {
+    background: none;
+    border: none;
+    color: #52cbbe;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.main-content {
+    display: flex;
+    padding: 20px;
+    min-height: 70vh; /* This sets a minimum height for the middle section */
+}
+
+.intro-section {
+    flex: 30%;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5) url('assets/intro-back.png') no-repeat center center; /* Add the image URL here */
+    background-size: cover; /* Adjusts the image to cover the entire section */
+    border-radius: 8px;
+    color: #fefafa;
+    border: white;
+    border-style: solid;
+}
+
+.intro-section h1 {
+    font-size: 48px;
+}
+
+.intro-section p {
+    font-size: 24px;
+}
+
+.intro-section button {
+    background-color: #52cbbe;
+    border: none;
+    color: #000000;
+    padding: 10px 20px;
+    margin: 20px 20px;
+    cursor: pointer;
+}
+
+.upload-section {
+    flex: 70%;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    margin-left: 20px;
+    position: relative;
+    border: white;
+    border-style: solid;
+}
+
+.language-toggle {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #52cbbe;
+}
+
+.language-toggle label {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #000000;
+    border: white;
+    border-style: solid;
+}
+
+.social-media a {
+    color: #52cbbe;
+    margin-right: 20px;
+}
+
+.company-info {
+    text-align: right;
+}
+
+/* Chatbot icon */
+.chatbot-icon {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+    background-color: transparent;
+    border-style: solid;
+    border-color: #52cbbe;
+    border-radius: 50%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chatbot-icon img {
+    width: 50px;
+    height: 50px;
+}
+
+.social-media-icons img {
+    width: 30px;
+    height: 30px;
+    padding-right: 10px;
+}
+
+/* Chat popup */
+.chat-popup {
+    display: none;
+    position: absolute;
+    bottom: 70px;
+    right: 80px;
+    width: 300px;
+    border: 1px solid #52cbbe;
+    border-radius: 10px;
+    background-color: grey;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #52cbbe;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.chat-header button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.chat-body {
+    padding: 10px;
+    height: 300px;
+    overflow-y: auto;
+    color: #000000;
+}
+
+.chat-footer {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+
+.chat-footer input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.chat-footer button {
+    background-color: #52cbbe;
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.popup {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.popup-content {
+    background-color: black;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 5px solid #52cbbe;
+    width: 80%; /* Could be more or less, depending on screen size */
+    border-radius: 10px;
+    position: relative;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #52cbbe;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header, .footer {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav-buttons button {
+        margin: 5px 0;
+    }
+
+    .main-content {
+        flex-direction: column;
+    }
+
+    .intro-section, .upload-section {
+        margin: 10px 0;
+    }
+
+    .upload-section {
+        margin-left: 0;
+    }
+
+    .language-toggle {
+        justify-content: center;
+        margin-top: 10px;
+    }
+}
