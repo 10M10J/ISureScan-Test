@@ -8,7 +8,7 @@ from PyPDF2 import PdfReader
 from groq import Groq
 import pickle
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 CORS(app)  # Enable CORS
 
 load_dotenv()
@@ -89,6 +89,14 @@ def get_answers(client, user_doc, question, model, language_option=None):
     else:
         return "Error: Unable to generate answer prompt"
 
+@app.route('/')
+def serve_frontend():
+    return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/<path:path>')
+def serve_static_files(path):
+    return send_from_directory(app.static_folder, path)
+
 @app.route('/upload', methods=['POST'])
 def upload_file():
     try:
@@ -119,7 +127,7 @@ def summarize():
         print(f"Debug: Received document for summarization: {user_doc[:100]}")  # Print the first 100 characters for brevity
         print(f"Debug: Language option: {language_option}")
         summarization = get_summarization(client, user_doc, model, language_option)
-        print(f"Debug: Summarization result: {summarization[:50]}")
+        print(f"Debug: Summarization result: {summarization[:100]}")
         return jsonify({"summary": summarization})
     except Exception as e:
         logger.error(f"Error in summarize endpoint: {e}")
