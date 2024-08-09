@@ -143,7 +143,7 @@ body {
     width: 300px;
     border: 1px solid #52cbbe;
     border-radius: 10px;
-    background-color: grey;
+    background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -229,6 +229,20 @@ body {
     text-decoration: none;
     cursor: pointer;
 }
+
+.upload-container, .summary-container {
+    border: 2px solid #00ffff; /* Color of the border */
+    border-radius: 15px; /* Make the corners rounded */
+    padding: 20px; /* Add some padding inside the box */
+    margin: 20px 0; /* Add some space around the box */
+    background-color: rgba(255, 255, 255, 0.1); /* Optional: add a background color with some transparency */
+}
+
+.upload-container h2, .summary-container h3 {
+    margin-top: 0;
+    font-family: 'Arial', sans-serif; /* Ensure the font is consistent */
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
