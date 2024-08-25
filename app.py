@@ -20,6 +20,8 @@ model = "llama3-8b-8192"
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
+text_data = None
+
 def chat_with_groq(client, prompt, model):
     try:
         completion = client.chat.completions.create(
@@ -63,8 +65,9 @@ def get_summarization(client, user_doc, model, language_option=None):
 
 def get_answers(client, user_doc, question, model, language_option=None):
     prompt = ""
+    print(f"yes we are here: {user_doc[:100]}, {question}")
     if user_doc and question:
-        if language_option == 'None' or language_option == 'English':
+        if language_option == 'None' or language_option == 'en':
             prompt = f'''
             A user has uploaded an insurance document and asked the following question:
             
@@ -99,6 +102,7 @@ def serve_static_files(path):
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
+    global text_data
     try:
         if 'file' not in request.files:
             return jsonify({"error": "No file part"}), 400
@@ -113,6 +117,7 @@ def upload_file():
             store_name = file.filename[:-4]
             with open(f"{store_name}.pkl", "wb") as f:
                 pickle.dump(text, f)
+            text_data = text
             return jsonify({"message": "File uploaded successfully", "text": text})
     except Exception as e:
         logger.error(f"Error in upload_file: {e}")
@@ -135,12 +140,15 @@ def summarize():
 
 @app.route('/answer', methods=['POST'])
 def answer():
+    global text_data
     try:
         data = request.json
-        user_doc = data.get("text", "")
+        user_doc = text_data
+        #user_doc = data.get("text_data", "")
         question = data.get("question", "")
         language_option = data.get("language", "English")
         answer = get_answers(client, user_doc, question, model, language_option)
+        print(f"{answer}")
         return jsonify({"answer": answer})
     except Exception as e:
         logger.error(f"Error in answer endpoint: {e}")
