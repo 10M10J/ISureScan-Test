@@ -131,8 +131,9 @@ def summarize():
         language_option = data.get("language", "English")
         print(f"Debug: Received document for summarization: {user_doc[:100]}")  # Print the first 100 characters for brevity
         print(f"Debug: Language option: {language_option}")
-        summarization = get_summarization(client, user_doc, model, language_option)
-        print(f"Debug: Summarization result: {summarization[:100]}")
+        summarization_full = get_summarization(client, user_doc, model, language_option)
+        summarization = summarization_full.split('\n')
+        print(f"Debug: Summarization result: {summarization[:200]}")
         return jsonify({"summary": summarization})
     except Exception as e:
         logger.error(f"Error in summarize endpoint: {e}")
