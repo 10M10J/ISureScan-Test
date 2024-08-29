@@ -1,6 +1,7 @@
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(90deg, #000000, #737373);
+    /* background: radial-gradient(circle, #f6d149 0%, #334575 75%); */
+    background: #334575;
     color: #fefafa;
     margin: 0;
     padding: 0;
@@ -12,23 +13,25 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #000000;
-    border: white;
-    border-style: solid;
+    background-color: #ffffff;
+    height: 70px;
 }
 
 .logo {
-    height: 100px;
+    height: 120px;
     padding-left: 50px;
+    padding-top: 10px;
+    display: flex;
 }
 
 .nav-buttons button {
     background: none;
     border: none;
-    color: #52cbbe;
+    color: #334575;
     font-size: 20px;
     cursor: pointer;
     margin-left: 20px;
+    margin-right: 20px;
 }
 
 .main-content {
@@ -40,16 +43,19 @@ body {
 .intro-section {
     flex: 30%;
     padding: 20px;
-    background: rgba(0, 0, 0, 0.5) url('assets/intro-back.png') no-repeat center center; /* Add the image URL here */
+    /* background: url('assets/intro-back-1.png') no-repeat center center; Add the image URL here
     background-size: cover; /* Adjusts the image to cover the entire section */
+    background: transparent;
     border-radius: 8px;
-    color: #fefafa;
+    color: white;
     border: white;
     border-style: solid;
 }
 
 .intro-section h1 {
-    font-size: 48px;
+    font-size: 45px;
+    text-align: center;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .intro-section p {
@@ -57,18 +63,18 @@ body {
 }
 
 .intro-section button {
-    background-color: #52cbbe;
+    background-color: white;
     border: none;
-    color: #000000;
+    color: #334575;
     padding: 10px 20px;
     margin: 20px 20px;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 .upload-section {
     flex: 70%;
-    padding: 40px;
-    background: rgba(0, 0, 0, 0.5);
+    padding: 30px;
     border-radius: 8px;
     margin-left: 20px;
     position: relative;
@@ -79,8 +85,8 @@ body {
 .language-toggle {
     position: absolute;
     top: 10px;
-    left: 10px;
-    color: #52cbbe;
+    left: 15px;
+    color: #ffffff;
 }
 
 .language-toggle label {
@@ -93,29 +99,40 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #000000;
+    background-color: white;
+    color: #334575;
+}
+
+.social-media a {
+    color: #334575;
+    margin-right: 20px;
+}
+
+footer .company-info {
+    text-align: center;
+    color: #334575;
+}
+
+/* Chatbot icon */
+
+.chat-section {
+    flex: 30%;
+    padding: 30px;
+    border-radius: 8px;
+    margin-left: 20px;
+    position: relative;
     border: white;
     border-style: solid;
 }
 
-.social-media a {
-    color: #52cbbe;
-    margin-right: 20px;
-}
-
-.company-info {
-    text-align: right;
-}
-
-/* Chatbot icon */
 .chatbot-icon {
     position: absolute;
-    bottom: 20px;
+    bottom: 190px;
     right: 20px;
     cursor: pointer;
     background-color: transparent;
     border-style: solid;
-    border-color: #52cbbe;
+    border-color: #ffffff;
     border-radius: 50%;
     padding: 10px;
     display: flex;
@@ -138,10 +155,10 @@ body {
 .chat-popup {
     display: none;
     position: absolute;
-    bottom: 70px;
+    bottom: 190px;
     right: 80px;
     width: 300px;
-    border: 1px solid #52cbbe;
+    border: 1px solid #334575;
     border-radius: 10px;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -151,7 +168,7 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 10px;
-    background-color: #52cbbe;
+    background-color: #334575;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
@@ -167,7 +184,7 @@ body {
     padding: 10px;
     height: 300px;
     overflow-y: auto;
-    color: #000000;
+    color: #ffffff;
 }
 
 .chat-footer {
@@ -185,7 +202,7 @@ body {
 }
 
 .chat-footer button {
-    background-color: #52cbbe;
+    background-color: #334575;
     border: none;
     color: white;
     padding: 10px;
@@ -202,15 +219,15 @@ body {
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: #52cbbe; /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
 .popup-content {
-    background-color: black;
+    background-color: #334575;
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
-    border: 5px solid #52cbbe;
+    border: 5px solid #ffffff;
     width: 80%; /* Could be more or less, depending on screen size */
     border-radius: 10px;
     position: relative;
@@ -225,22 +242,39 @@ body {
 
 .close:hover,
 .close:focus {
-    color: #52cbbe;
+    color: #334575;
     text-decoration: none;
     cursor: pointer;
 }
 
 .upload-container, .summary-container {
-    border: 2px solid #00ffff; /* Color of the border */
+    /* width: 420px; */
+    /* border: 2px solid #ffffff; Color of the border */
     border-radius: 15px; /* Make the corners rounded */
     padding: 20px; /* Add some padding inside the box */
     margin: 20px 0; /* Add some space around the box */
-    background-color: rgba(255, 255, 255, 0.1); /* Optional: add a background color with some transparency */
+    background-color: rgba(255, 255, 255, 0.5); /* Optional: add a background color with some transparency */
+    text-align: center;
+}
+
+.upload-container button {
+    background: #334575;
+    border: solid #ffffff;
+    color: #ffffff;
+    font-size: 30px;
+    cursor: pointer;
+   /* margin-left: 100px;
+    margin-right: 20px; */
+    border-radius: 5px;
+    text-align: center;
 }
 
 .upload-container h2, .summary-container h3 {
-    margin-top: 0;
+    margin-top: 10;
+    margin-left: 40px;
     font-family: 'Arial', sans-serif; /* Ensure the font is consistent */
+    font-size: medium;
+    color: #334575;
 }
 
 
@@ -259,7 +293,7 @@ body {
         flex-direction: column;
     }
 
-    .intro-section, .upload-section {
+    .intro-section, .upload-section, .chat-section{
         margin: 10px 0;
     }
 
@@ -270,5 +304,9 @@ body {
     .language-toggle {
         justify-content: center;
         margin-top: 10px;
+    }
+
+    .logo{
+        align-self: auto;
     }
 }

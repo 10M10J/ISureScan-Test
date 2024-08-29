@@ -8,7 +8,7 @@
 </head>
 <body ng-controller="UploadController">
     <header class="header">
-        <img src="assets/logo.png" alt="Logo" class="logo">
+        <img src="assets/logo-new.png" alt="Logo" class="logo">
         <div class="nav-buttons">
             <button id="aboutBtn">About</button>
             <button id="helpBtn">Help</button>
@@ -17,7 +17,7 @@
     </header>
     <main class="main-content">
         <section class="intro-section">
-            <h1>Talk to Your INSURANCE POLICY!</h1>
+            <h1>Talk to Your INSURANCE POLICY !</h1>
             <p>Simply upload your PDF or image file and get the summary of your insurance policy. Well, you can ask questions too.</p>
             <button>Learn More</button>
             <button>Watch Video</button>
@@ -32,29 +32,28 @@
                 </label>
             </div>
             <file-upload></file-upload>
-            <div class="chatbot-icon" onclick="toggleChat()">
-                <img src="assets/chatbot-1.png" alt="Chatbot Icon">
-            </div>
-            <div class="chat-popup" id="chatPopup">
+        </section>
+        <section class="chat-section">
+            <div class="chat-box">
                 <div class="chat-header">
-                    <span>Chatbot</span>
-                    <button onclick="toggleChat()">Close</button>
+                    <h3>ChatBot</h3>
                 </div>
-                <div class="chat-body">
+                <div class="chat-body" id="chatBody">
+                    <!-- Messages will appear here -->
                     <p>Hello! How can I assist you today?</p>
                     <!-- Add more chat messages as needed -->
                     <label for="question">Ask a question about your Insurance PDF:</label>
+                    <div ng-if="answer">
+                        <h2>Answer:</h2>
+                        <p>{{answer}}</p>
+                    </div>
                 </div>
                 <div class="chat-footer">
-                    <input type="text" id="question" ng-model="question">
+                    <input type="text" id="question" ng-model="question" placeholder="Type your message...">
                     <button ng-click="askQuestion()">Send</button>
                 </div>
-                <div ng-if="answer">
-                    <h2>Answer:</h2>
-                    <p>{{answer}}</p>
-                </div>
-            </div>
-        </section>
+            </div>            
+        </section>        
     </main>
     <footer class="footer">
         <div class="social-media">
