@@ -182,7 +182,7 @@ footer .company-info {
 
 .chat-body {
     padding: 10px;
-    height: 300px;
+    height: 500px;
     overflow-y: auto;
     color: #ffffff;
 }
@@ -247,7 +247,7 @@ footer .company-info {
     cursor: pointer;
 }
 
-.upload-container, .summary-container {
+.upload-container {
     /* width: 420px; */
     /* border: 2px solid #ffffff; Color of the border */
     border-radius: 15px; /* Make the corners rounded */
@@ -255,6 +255,16 @@ footer .company-info {
     margin: 20px 0; /* Add some space around the box */
     background-color: rgba(255, 255, 255, 0.5); /* Optional: add a background color with some transparency */
     text-align: center;
+}
+
+.summary-container {
+    /* width: 420px; */
+    /* border: 2px solid #ffffff; Color of the border */
+    border-radius: 15px; /* Make the corners rounded */
+    padding: 20px; /* Add some padding inside the box */
+    margin: 20px 0; /* Add some space around the box */
+    background-color: rgba(255, 255, 255, 0.5); /* Optional: add a background color with some transparency */
+    text-align: left;
 }
 
 .upload-container button {
@@ -283,6 +293,8 @@ footer .company-info {
     .header, .footer {
         flex-direction: column;
         text-align: center;
+        height: auto;
+        padding: 5px 10px;
     }
 
     .nav-buttons button {
@@ -307,6 +319,8 @@ footer .company-info {
     }
 
     .logo{
-        align-self: auto;
+        height: 80px; /* Scale down logo height */
+        padding-left: 10px; /* Reduce padding */
+        padding-top: 5px; /* Reduce padding */
     }
 }

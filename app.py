@@ -33,7 +33,7 @@ def chat_with_groq(client, prompt, model):
         logger.error(f"Error in chat_with_groq: {e}")
         return "Error in generating response from Groq"
 
-def get_summarization(client, user_doc, model, language_option=None):
+def get_summarization(client, user_doc, model, language_option):
     print(f"Debug: language_option received: {language_option}")  # Debugging line
     print(f"Debug: user_doc received: ")  # Debugging line
     
@@ -44,7 +44,7 @@ def get_summarization(client, user_doc, model, language_option=None):
 
         {user_doc}
 
-        In a few sentences, summarize the data in 10 most important points.
+        Summarize the policy in the 5 most important points with maximum 75 words. Provide each point clearly, without any bullet markers, and separate each point with a newline.
         '''
     elif language_option in ['Hindi', 'hi']:
         prompt = f'''
@@ -52,7 +52,7 @@ def get_summarization(client, user_doc, model, language_option=None):
 
         {user_doc}
 
-        In a few sentences, summarize the data in Hindi language in 10 most important points.
+        Summarize the policy in Hindi language, focusing on the 5 most important points with maximum 75 words. Provide each point clearly, without any bullet markers, and separate each point with a newline.
         '''
     else:
         print(f"Debug: Unexpected language_option value: {language_option}")  # Debugging line
@@ -131,8 +131,13 @@ def summarize():
         language_option = data.get("language", "English")
         print(f"Debug: Received document for summarization: {user_doc[:100]}")  # Print the first 100 characters for brevity
         print(f"Debug: Language option: {language_option}")
+        
+        # Call the model to get the summarization as a full string
         summarization_full = get_summarization(client, user_doc, model, language_option)
-        summarization = summarization_full.split('\n')
+        
+        # Split the summarization into lines, assuming the model returns bullet points or new lines.
+        summarization = [line.strip() for line in summarization_full.splitlines() if line.strip()]
+        
         print(f"Debug: Summarization result: {summarization[:200]}")
         return jsonify({"summary": summarization})
     except Exception as e:
