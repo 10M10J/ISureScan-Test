@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp">
+<html ng-app="myApp">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,17 +18,17 @@
     <main class="main-content">
         <section class="intro-section">
             <h1>Talk to Your INSURANCE POLICY !</h1>
-            <p>Simply upload your PDF or image file and get the summary of your insurance policy. Well, you can ask questions too.</p>
+            <p>Simply upload your PDF file and get the summary of your insurance policy. Well, you can ask questions too.</p>
             <button>Learn More</button>
             <button>Watch Video</button>
         </section>
-        <section class="upload-section" ng-controller="UploadController">
+        <section class="upload-section">
             <div class="language-toggle">
                 <label>
-                    <input type="radio" ng-model="language" value="en" ng-click="setLanguage('en')"> English
+                    <input type="radio" ng-model="language" value='en' ng-change="setLanguage('en')"> English
                 </label>
                 <label>
-                    <input type="radio" ng-model="language" value="hi" ng-click="setLanguage('hi')"> हिंदी
+                    <input type="radio" ng-model="language" value='hi' ng-change="setLanguage('hi')"> हिंदी
                 </label>
             </div>
             <file-upload></file-upload>
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="chat-footer">
-                    <input type="text" id="question" ng-model="question" placeholder="Type your message...">
+                    <input type="text" id="question" ng-model="question" placeholder="Ask your question here...">
                     <button ng-click="askQuestion()">Send</button>
                 </div>
             </div>            

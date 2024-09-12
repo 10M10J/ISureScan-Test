@@ -5,3 +5,5 @@ faiss-cpu==1.7.4
 groq==0.4.0
 flask
 flask_cors
+google-cloud-aiplatform
+google-generativeai

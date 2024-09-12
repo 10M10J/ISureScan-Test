@@ -5,16 +5,37 @@ from dotenv import load_dotenv
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from PyPDF2 import PdfReader
-from groq import Groq
+# from groq import Groq
 import pickle
+import google.generativeai as genai
+from google.ai import generativelanguage as glm
 
 app = Flask(__name__, static_folder='static')
 CORS(app)  # Enable CORS
 
 load_dotenv()
-groq_api_key = os.environ['GROQ_API_KEY']
-client = Groq(api_key=groq_api_key)
-model = "llama3-8b-8192"
+google_api_key = os.environ["GOOGLE_API_KEY"]
+genai.configure(api_key=google_api_key)
+# client = glm.GenerativeServiceClient (client_options={'api_key': google_api_key})
+# model = "llama3-70b-8192"
+# model = "llama-3.1-405b-reasoning"
+# model = "llava-v1.5-7b-4096-preview"
+
+# Create the model
+generation_config = {
+  "temperature": 0,
+  "top_p": 0.95,
+  "top_k": 64,
+  "max_output_tokens": 8192,
+  "response_mime_type": "text/plain",
+}
+
+model = genai.GenerativeModel(
+  model_name="gemini-1.5-flash",
+  generation_config=generation_config,
+  # safety_settings = Adjust safety settings
+  # See https://ai.google.dev/gemini-api/docs/safety-settings
+)
 
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
@@ -22,18 +43,15 @@ logger = logging.getLogger(__name__)
 
 text_data = None
 
-def chat_with_groq(client, prompt, model):
+def chat_with_groq(prompt, model):
     try:
-        completion = client.chat.completions.create(
-            model=model,
-            messages=[{"role": "user", "content": prompt}]
-        )
-        return completion.choices[0].message.content
+        completion = model.generate_content(prompt)
+        return completion.text
     except Exception as e:
         logger.error(f"Error in chat_with_groq: {e}")
-        return "Error in generating response from Groq"
+        return "Error in generating response from Google"
 
-def get_summarization(client, user_doc, model, language_option):
+def get_summarization(user_doc, model, language_option):
     print(f"Debug: language_option received: {language_option}")  # Debugging line
     print(f"Debug: user_doc received: ")  # Debugging line
     
@@ -58,12 +76,12 @@ def get_summarization(client, user_doc, model, language_option):
         print(f"Debug: Unexpected language_option value: {language_option}")  # Debugging line
     
     if prompt:
-        print(f"Debug: Prompt generated: ")  # Debugging line
-        return chat_with_groq(client, prompt, model)
+        print(f"Debug: Prompt generated: {prompt}")  # Debugging line
+        return chat_with_groq(prompt, model)
     else:
         return "Error: Unable to generate summarization prompt"
 
-def get_answers(client, user_doc, question, model, language_option=None):
+def get_answers(user_doc, question, model, language_option=None):
     prompt = ""
     print(f"yes we are here: {user_doc[:100]}, {question}")
     if user_doc and question:
@@ -77,7 +95,7 @@ def get_answers(client, user_doc, question, model, language_option=None):
             
             {user_doc}
         '''
-        elif language_option == 'Hindi':
+        elif language_option == 'Hindi' or language_option == 'hi':
             prompt = f'''
             A user has uploaded an insurance document and asked the following question:
 
@@ -88,7 +106,7 @@ def get_answers(client, user_doc, question, model, language_option=None):
             {user_doc}
         '''
     if prompt:
-        return chat_with_groq(client, prompt, model)
+        return chat_with_groq(prompt, model)
     else:
         return "Error: Unable to generate answer prompt"
 
@@ -131,9 +149,12 @@ def summarize():
         language_option = data.get("language", "English")
         print(f"Debug: Received document for summarization: {user_doc[:100]}")  # Print the first 100 characters for brevity
         print(f"Debug: Language option: {language_option}")
+
+        #print(f"Google API Key: {google_api_key}")
+        #print(f"Client: {client}")
         
         # Call the model to get the summarization as a full string
-        summarization_full = get_summarization(client, user_doc, model, language_option)
+        summarization_full = get_summarization(user_doc, model, language_option)
         
         # Split the summarization into lines, assuming the model returns bullet points or new lines.
         summarization = [line.strip() for line in summarization_full.splitlines() if line.strip()]
@@ -153,7 +174,7 @@ def answer():
         #user_doc = data.get("text_data", "")
         question = data.get("question", "")
         language_option = data.get("language", "English")
-        answer = get_answers(client, user_doc, question, model, language_option)
+        answer = get_answers(user_doc, question, model, language_option)
         print(f"{answer}")
         return jsonify({"answer": answer})
     except Exception as e:

@@ -1,4 +1,5 @@
 // upload.component.js
+var language = 'en';
 angular.module('myApp').controller('UploadController', ['$scope', 'UploadService', function($scope, UploadService) {
     $scope.language = 'en'; // default language
     $scope.uploadedText = '';
@@ -7,10 +8,12 @@ angular.module('myApp').controller('UploadController', ['$scope', 'UploadService
     $scope.answer = '';
 
     $scope.setLanguage = function(lang) {
-        $scope.language = lang;
+        language = lang;
+        console.log("Debug: Language set to:", lang);
     };
 
     $scope.uploadFile = function() {
+        console.log("Debug: Language before upload:", language);  // Ensure correct language is passed
         var fileInput = document.getElementById('fileInput');  // Ensure 'fileInput' matches the input ID
         if (!fileInput) {
             console.log("Debug: fileInput element not found.");
@@ -18,8 +21,9 @@ angular.module('myApp').controller('UploadController', ['$scope', 'UploadService
         }
         var file = fileInput.files[0];
         console.log("Debug: File selected for upload:", file);
+        console.log("Debug: Language to be used for upload:", language);
         if (file) {
-            UploadService.uploadFile(file, $scope.language).then(function(response) {
+            UploadService.uploadFile(file, language).then(function(response) {
                 console.log("Debug: Upload response:", response);
                 $scope.uploadedText = response.data.text;
                 // Call summarize API if needed
@@ -34,7 +38,7 @@ angular.module('myApp').controller('UploadController', ['$scope', 'UploadService
 
     $scope.summarize = function() {
         console.log("Debug: Text to summarize:", $scope.uploadedText);
-        UploadService.summarize($scope.uploadedText, $scope.language).then(function(response) {
+        UploadService.summarize($scope.uploadedText, language).then(function(response) {
             console.log("Debug: Summarize response:", response);
             $scope.summary = response.data.summary;
         }, function(error) {
@@ -45,7 +49,7 @@ angular.module('myApp').controller('UploadController', ['$scope', 'UploadService
     $scope.askQuestion = function() {
         console.log("Debug: Text to ask question:", $scope.uploadedText);
         console.log("Debug: Question:", $scope.question);
-        UploadService.askQuestion($scope.uploadedText, $scope.question, $scope.language).then(function(response) {
+        UploadService.askQuestion($scope.uploadedText, $scope.question, language).then(function(response) {
             console.log("Debug: Ask question response:", response);
             $scope.answer = response.data.answer;
         }, function(error) {
