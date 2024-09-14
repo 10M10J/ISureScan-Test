@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1F802QR1SV"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1F802QR1SV');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iSureScan</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body ng-controller="UploadController">
     <header class="header">
@@ -20,9 +30,12 @@
             <h1>Talk to Your INSURANCE POLICY !</h1>
             <p>Simply upload your PDF file and get the summary of your insurance policy. Well, you can ask questions too.</p>
             <button>Learn More</button>
-            <button>Watch Video</button>
+            <button onclick="openGoogleForm()">FeedBack Form</button>
         </section>
         <section class="upload-section">
+            <div class="refresh-icon">
+                <i class="fas fa-sync-alt" ng-click="refreshPage()"></i>
+            </div>
             <div class="language-toggle">
                 <label>
                     <input type="radio" ng-model="language" value='en' ng-change="setLanguage('en')"> English
@@ -41,11 +54,8 @@
                 <div class="chat-body" id="chatBody">
                     <!-- Messages will appear here -->
                     <p>Hello! How can I assist you today?</p>
-                    <!-- Add more chat messages as needed -->
-                    <label for="question">Ask a question about your Insurance PDF:</label>
-                    <div ng-if="answer">
-                        <h2>Answer:</h2>
-                        <p>{{answer}}</p>
+                    <div ng-repeat="msg in conversation track by $index" class="message">
+                        <strong>{{msg.sender}}:</strong> {{msg.text}}
                     </div>
                 </div>
                 <div class="chat-footer">
@@ -67,6 +77,10 @@
         <div class="company-info">
             <p>Copyright © 2024 StirPot Products Pvt Ltd</p>
             <p>Developed by StirPot</p>
+        </div>
+        <div class="privacy-policy">
+            <p><a href="https://stirpot.in/privacy-policy-stirpot" target="_blank" rel="noopener noreferrer">Privacy Policy</a></p>
+            <p><a href="https://stirpot.in/terms-and-condition" target="_blank" rel="noopener noreferrer">Terms & Conditions</a></p>
         </div>
     </footer>
 
@@ -95,7 +109,7 @@
             <h2>Contact us</h2>
             <p>Looking to contact us? There's a few ways to do it based on your inquiry—check out all your options below.</p>
             <h4>Get support</h4>
-            <p>If you're having trouble with iSureScan, check out articles in Learn More section or write to us at contact@stirpot.in.</p>
+            <p>If you're having trouble with iSureScan, check out articles in Learn More section or write to us at mohit@stirpot.in.</p>
         </div>
     </div>
 

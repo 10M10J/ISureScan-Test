@@ -6,55 +6,78 @@ angular.module('myApp').controller('UploadController', ['$scope', 'UploadService
     $scope.summary = '';
     $scope.question = '';
     $scope.answer = '';
+    $scope.conversation = [];  // to hold the conversation history
 
+    // Function to set the language
     $scope.setLanguage = function(lang) {
         language = lang;
-        console.log("Debug: Language set to:", lang);
     };
 
     $scope.uploadFile = function() {
-        console.log("Debug: Language before upload:", language);  // Ensure correct language is passed
+    //    console.log("Debug: Language before upload:", language);  // Ensure correct language is passed
         var fileInput = document.getElementById('fileInput');  // Ensure 'fileInput' matches the input ID
         if (!fileInput) {
-            console.log("Debug: fileInput element not found.");
+    //        console.log("Debug: fileInput element not found.");
             return;
         }
         var file = fileInput.files[0];
-        console.log("Debug: File selected for upload:", file);
-        console.log("Debug: Language to be used for upload:", language);
+    //    console.log("Debug: File selected for upload:", file);
+    //    console.log("Debug: Language to be used for upload:", language);
         if (file) {
             UploadService.uploadFile(file, language).then(function(response) {
-                console.log("Debug: Upload response:", response);
+    //            console.log("Debug: Upload response:", response);
                 $scope.uploadedText = response.data.text;
                 // Call summarize API if needed
                 $scope.summarize();
             }, function(error) {
-                console.error('Error uploading file:', error);
+    //            console.error('Error uploading file:', error);
+                //$scope.uploadedText = error
+                alert("Error: either the file is corrupted or password protected.")
             });
         }else {
-            console.log("Debug: No file selected.");
+    //        console.log("Debug: No file selected.");
+                alert("Please upload your policy document.")
         }
     };
 
     $scope.summarize = function() {
-        console.log("Debug: Text to summarize:", $scope.uploadedText);
+    //    console.log("Debug: Text to summarize:", $scope.uploadedText);
         UploadService.summarize($scope.uploadedText, language).then(function(response) {
-            console.log("Debug: Summarize response:", response);
+    //        console.log("Debug: Summarize response:", response);
             $scope.summary = response.data.summary;
         }, function(error) {
-            console.error('Error summarizing text:', error);
+    //        console.error('Error summarizing text:', error);
         });
     };
 
     $scope.askQuestion = function() {
-        console.log("Debug: Text to ask question:", $scope.uploadedText);
-        console.log("Debug: Question:", $scope.question);
-        UploadService.askQuestion($scope.uploadedText, $scope.question, language).then(function(response) {
-            console.log("Debug: Ask question response:", response);
-            $scope.answer = response.data.answer;
-        }, function(error) {
-            console.error('Error getting answer:', error);
+    //    console.log("Debug: Text to ask question:", $scope.uploadedText);
+    //    console.log("Debug: Question:", $scope.question);
+        if (!$scope.question.trim()) return;  // Ensure question is not empty
+
+        // Add the user's question to the conversation
+        $scope.conversation.push({
+            sender: 'User',
+            text: $scope.question
         });
+        // Make the request to get the chatbot's answer
+        UploadService.askQuestion($scope.uploadedText, $scope.question, language).then(function(response) {
+    //        console.log("Debug: Ask question response:", response);
+            // Add the chatbot's answer to the conversation
+            $scope.conversation.push({
+                sender: 'ChatBot',
+                text: response.data.answer
+            });
+            // Clear the input question field
+            $scope.question = '';
+            //$scope.answer = response.data.answer;
+        }, function(error) {
+    //        console.error('Error getting answer:', error);
+        });
+    };
+
+    $scope.refreshPage = function() {
+        window.location.reload();  // This will refresh the page
     };
 }]);
 

@@ -51,3 +51,8 @@ window.onclick = function(event) {
         loginPopup.style.display = "none";
     }
 }
+
+function openGoogleForm() {
+    // Replace the URL below with the actual URL of your Google Form
+    window.open("https://forms.gle/niZzHa2wuRqDzLne8", "_blank");
+}

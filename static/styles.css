@@ -82,6 +82,19 @@ body {
     border-style: solid;
 }
 
+.refresh-icon {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.refresh-icon:hover {
+    color: #007bff; /* Change the color on hover */
+}
+
 .language-toggle {
     position: absolute;
     top: 10px;
@@ -109,6 +122,13 @@ body {
 }
 
 footer .company-info {
+    flex-grow: 1; /* Allows this div to grow and take available space */
+    text-align: center;
+    color: #334575;
+}
+
+footer .privacy-policy {
+    margin-left: 30px;
     text-align: center;
     color: #334575;
 }
@@ -203,12 +223,27 @@ footer .company-info {
 
 .chat-footer button {
     background-color: #334575;
-    border: none;
+    border: #ffffff;
     color: white;
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
 }
+
+.message {
+    margin: 10px 0;
+}
+
+.message strong {
+    color: #8084e0;
+}
+
+.message p {
+    background: #f1f1f1;
+    padding: 8px;
+    border-radius: 5px;
+}
+
 
 .popup {
     display: none; /* Hidden by default */
