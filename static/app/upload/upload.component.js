@@ -32,7 +32,7 @@ angular.module('myApp').controller('UploadController', ['$scope', 'UploadService
             }, function(error) {
     //            console.error('Error uploading file:', error);
                 //$scope.uploadedText = error
-                alert("Error: either the file is corrupted or password protected.")
+                alert("Oops! Looks like uploaded file is Corrupted or Password Protected.")
             });
         }else {
     //        console.log("Debug: No file selected.");

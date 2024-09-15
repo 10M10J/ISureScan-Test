@@ -96,8 +96,8 @@ body {
 }
 
 .language-toggle {
-    position: absolute;
-    top: 10px;
+    /* position: absolute; */
+    /* top: 50px; */
     left: 15px;
     color: #ffffff;
 }
@@ -105,6 +105,15 @@ body {
 .language-toggle label {
     margin-left: 10px;
     cursor: pointer;
+}
+
+.language-description {
+    /* position: absolute; */
+    font-size: 16px;
+    font-weight: bold;
+    /* top: 10px; */
+    left: 15px;
+    color: #ffffff; /* Adjust text color if necessary */
 }
 
 .footer {
