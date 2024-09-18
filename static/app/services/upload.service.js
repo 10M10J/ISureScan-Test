@@ -1,6 +1,6 @@
 const config = {
     //apiUrl: 'https://isurescan-756660766241.us-central1.run.app/'
-    apiUrl: 'http://127.0.01/'
+    apiUrl: 'http://127.0.0.1/'
 
 };
 
@@ -10,7 +10,7 @@ angular.module('myApp').service('UploadService', function($http) {
         var formData = new FormData();
         formData.append('file', file);
         formData.append('language', language);
-        return $http.post(config.apiUrl+'upload', formData, {
+        return $http.post(config.apiUrl + 'upload', formData, {
             headers: { 'Content-Type': undefined }
         });
     };

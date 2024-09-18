@@ -176,4 +176,4 @@ def answer():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(host='https://isurescan-756660766241.us-central1.run.app', port=8080, debug=False)
+    app.run(host='0.0.0.0', port=8080, debug=False)
