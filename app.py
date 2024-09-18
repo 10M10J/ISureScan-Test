@@ -14,7 +14,7 @@ CORS(app)  # Enable CORS
 
 load_dotenv()
 google_api_key =  os.getenv('GOOGLE_API_KEY')
-google_api_key = 'd'
+
 genai.configure(api_key=google_api_key)
 
 # Create the model
