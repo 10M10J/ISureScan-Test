@@ -1,1 +1,1 @@
-GOOGLE_API_KEY= ${{ secrets.GCP_API_KEY }}
+GOOGLE_API_KEY= ${{ secrets.GOOGLE_API_KEY }}
