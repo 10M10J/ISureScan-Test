@@ -1,6 +1,8 @@
 # Use the official Python image as the base image
 FROM python:3.9-slim
 
+ARG GOOGLE_API_KEY
+ENV GOOGLE_API_KEY=${GOOGLE_API_KEY}
 # Set the working directory in the container
 WORKDIR /app
 
