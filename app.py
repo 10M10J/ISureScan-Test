@@ -1,6 +1,5 @@
 import time
 import os
-import var
 import logging
 from dotenv import load_dotenv
 from flask import Flask, request, jsonify, send_from_directory
@@ -14,7 +13,7 @@ app = Flask(__name__, static_folder='static')
 CORS(app)  # Enable CORS
 
 load_dotenv()
-google_api_key = {var.GOOGLE_API_KEY}
+google_api_key = 'AIzaSyCgBWmxVnGE1Bybsvzfg3DnT742e4kAqBo'
 genai.configure(api_key=google_api_key)
 
 # Create the model
