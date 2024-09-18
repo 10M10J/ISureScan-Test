@@ -13,7 +13,7 @@ app = Flask(__name__, static_folder='static')
 CORS(app)  # Enable CORS
 
 load_dotenv()
-google_api_key = ''
+google_api_key =  os.getenv('GOOGLE_API_KEY')
 genai.configure(api_key=google_api_key)
 
 # Create the model
@@ -175,4 +175,4 @@ def answer():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(host='127.0.0.1', port=8080, debug=False)

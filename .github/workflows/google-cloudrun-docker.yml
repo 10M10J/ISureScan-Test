@@ -40,8 +40,7 @@ env:
   GAR_LOCATION: 'us-central1'
   REGION: 'us-central1'
   SERVICE: 'isurescan'
-  PORT: 5000
-  #WORKLOAD_IDENTITY_PROVIDER: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider' # TODO: update to your workload identity provider
+  GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
 
 jobs:
   deploy:
