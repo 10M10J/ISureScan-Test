@@ -1,6 +1,6 @@
 const config = {
-    //apiUrl: 'https://isurescan-756660766241.us-central1.run.app/'
-    apiUrl: 'http://127.0.0.1/'
+    apiUrl: 'https://isurescan-756660766241.us-central1.run.app/'
+    //apiUrl: 'http://127.0.0.1/'
 
 };
 
