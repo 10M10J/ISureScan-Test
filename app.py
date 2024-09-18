@@ -13,7 +13,7 @@ app = Flask(__name__, static_folder='static')
 CORS(app)  # Enable CORS
 
 load_dotenv()
-google_api_key = 'AIzaSyCgBWmxVnGE1Bybsvzfg3DnT742e4kAqBo'
+google_api_key = ''
 genai.configure(api_key=google_api_key)
 
 # Create the model
