@@ -35,7 +35,7 @@ on:
       - 'main'
 
 env:
-  PROJECT_ID: 'isurescan-dev-01' # TODO: update to your Google Cloud project ID
+  PROJECT_ID: 'm10j10' # TODO: update to your Google Cloud project ID
   GAR_NAME: 'gh-dev'
   GAR_LOCATION: 'us-central1'
   REGION: 'us-central1'
