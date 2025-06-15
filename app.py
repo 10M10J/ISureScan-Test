@@ -58,7 +58,9 @@ def get_summarization(user_doc, model, language_option):
 
         {user_doc}
 
-        Summarize the policy in the 5 most important points with maximum 75 words. Provide each point clearly, without any bullet markers, and separate each point with a newline.
+        Find the word "insurance" in the document and if it is present then Summarize the policy in the 5 most important points with maximum 75 words. Provide each point clearly, without any bullet markers, and separate each point with a newline.
+
+        Otherwise please respond saying "Uploaded document is not an Insurance Document.".
         '''
     elif language_option in ['Hindi', 'hi']:
         prompt = f'''
@@ -66,7 +68,8 @@ def get_summarization(user_doc, model, language_option):
 
         {user_doc}
 
-        Summarize the policy in Hindi language, focusing on the 5 most important points with maximum 75 words. Provide each point clearly, without any bullet markers, and separate each point with a newline.
+        Find the word "insurance" in the document and if it is present then Summarize the policy in Hindi language, focusing on the 5 most important points with maximum 75 words. Provide each point clearly, without any bullet markers, and separate each point with a newline.
+        Otherwise please respond saying "अपलोड किया गया दस्तावेज़ बीमा दस्तावेज़ नहीं है.".
         '''
 #    else:
 #        print(f"Debug: Unexpected language_option value: {language_option}")  # Debugging line
@@ -174,6 +177,6 @@ def answer():
     except Exception as e:
         logger.error(f"Error in answer endpoint: {e}")
         return jsonify({"error": str(e)}), 500
-
+    
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=False)
